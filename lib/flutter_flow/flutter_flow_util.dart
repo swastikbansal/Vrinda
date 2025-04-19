@@ -656,3 +656,63 @@ String getCurrentRoute(BuildContext context) =>
     context.mounted ? MyApp.of(context).getRoute() : '';
 List<String> getCurrentRouteStack(BuildContext context) =>
     context.mounted ? MyApp.of(context).getRouteStack() : [];
+
+class FFAppState extends ChangeNotifier {
+  String _Nvalue = 'N/A';
+  String get Nvalue => _Nvalue;
+  set Nvalue(String value) {
+    _Nvalue = value;
+    prefs.setString('ff_Nvalue', value);
+    notifyListeners();
+  }
+
+  String _Pvalue = 'N/A';
+  String get Pvalue => _Pvalue;
+  set Pvalue(String value) {
+    _Pvalue = value;
+    prefs.setString('ff_Pvalue', value);
+    notifyListeners();
+  }
+
+  String _Kvalue = 'N/A';
+  String get Kvalue => _Kvalue;
+  set Kvalue(String value) {
+    _Kvalue = value;
+    prefs.setString('ff_Kvalue', value);
+    notifyListeners();
+  }
+
+  String _ECvalue = 'N/A';
+  String get ECvalue => _ECvalue;
+  set ECvalue(String value) {
+    _ECvalue = value;
+    prefs.setString('ff_ECvalue', value);
+    notifyListeners();
+  }
+
+  String _moistureValue = 'N/A';
+  String get moistureValue => _moistureValue;
+  set moistureValue(String value) {
+    _moistureValue = value;
+    prefs.setString('ff_moistureValue', value);
+    notifyListeners();
+  }
+
+  bool _bleConnected = false;
+  bool get bleConnected => _bleConnected;
+  set bleConnected(bool value) {
+    _bleConnected = value;
+    prefs.setBool('ff_bleConnected', value);
+    notifyListeners();
+  }
+
+  @override
+  void initializePersistedState() async {
+    _Nvalue = prefs.getString('ff_Nvalue') ?? _Nvalue;
+    _Pvalue = prefs.getString('ff_Pvalue') ?? _Pvalue;
+    _Kvalue = prefs.getString('ff_Kvalue') ?? _Kvalue;
+    _ECvalue = prefs.getString('ff_ECvalue') ?? _ECvalue;
+    _moistureValue = prefs.getString('ff_moistureValue') ?? _moistureValue;
+    _bleConnected = prefs.getBool('ff_bleConnected') ?? _bleConnected;
+  }
+}
